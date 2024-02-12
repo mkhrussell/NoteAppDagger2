@@ -1,0 +1,141 @@
+// Part of the file was automatically generated with:
+// pom2bp .
+
+java_import {
+    name: "lib-guava-failureaccess",
+    jars: ["com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar"],
+    host_supported: true,
+    sdk_version: "current",
+}
+
+java_import {
+    name: "lib-guava-jre",
+    jars: ["com/google/guava/guava/31.1-jre/guava-31.1-jre.jar"],
+    host_supported: true,
+    sdk_version: "current",
+}
+
+java_import {
+    name: "lib-google-java-format",
+    jars: ["com/google/googlejavaformat/google-java-format/1.5/google-java-format-1.5.jar"],
+    host_supported: true,
+    sdk_version: "current",
+}
+
+java_import {
+    name: "lib-incap",
+    jars: ["net/ltgt/gradle/incap/incap/0.2/incap-0.2.jar"],
+    host_supported: true,
+    sdk_version: "current",
+}
+
+java_import {
+    name: "lib-dagger",
+    jars: ["com/google/dagger/dagger/2.50/dagger-2.50.jar"],
+    host_supported: true,
+    sdk_version: "current",
+}
+
+java_import_host {
+    name: "lib-kotlinx-metadata-jvm",
+    jars: ["org/jetbrains/kotlinx/kotlinx-metadata-jvm/0.5.0/kotlinx-metadata-jvm-0.5.0.jar"],
+}
+
+java_import_host {
+    name: "lib-dagger-compiler-import",
+    jars: [
+        "com/google/dagger/dagger-compiler/2.50/dagger-compiler-2.50.jar",
+        "com/google/dagger/dagger-producers/2.50/dagger-producers-2.50.jar",
+        "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "com/google/dagger/dagger-spi/2.50/dagger-spi-2.50.jar",
+        "com/google/devtools/ksp/symbol-processing-api/1.9.20-1.0.14/symbol-processing-api-1.9.20-1.0.14.jar",
+        "com/google/errorprone/error_prone_annotations/2.15.0/error_prone_annotations-2.15.0.jar",
+        "org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar",
+    ],
+}
+
+java_plugin {
+    name: "lib-dagger-compiler",
+    static_libs: [
+        "lib-dagger-compiler-import",
+        "lib-dagger",
+        "lib-guava-jre",
+        "lib-kotlinx-metadata-jvm",
+        "jsr330",
+        "javapoet",
+        "kotlinpoet",
+        "kotlin-stdlib",
+        "kotlin-stdlib-jdk8",
+    ],
+    processor_class: "dagger.internal.codegen.ComponentProcessor",
+    generates_api: true,
+    // shade guava to avoid conflicts with guava embedded in Error Prone.
+    jarjar_rules: "dagger-jarjar-rules.txt"
+}
+
+android_library_import {
+    name: "lib-dagger-lint-aar",
+    aars: ["com/google/dagger/dagger-lint-aar/2.50/dagger-lint-aar-2.50.aar"],
+    sdk_version: "current",
+}
+
+android_library_import {
+    name: "lib-dagger-android",
+    aars: ["com/google/dagger/dagger-android/2.50/dagger-android-2.50.aar"],
+    sdk_version: "current",
+    static_libs: [
+        "androidx.annotation_annotation",
+        "jsr330",
+        "lib-dagger",
+        "lib-dagger-lint-aar",
+    ],
+}
+
+android_library_import {
+    name: "lib-dagger-android-support",
+    aars: ["com/google/dagger/dagger-android-support/2.50/dagger-android-support-2.50.aar"],
+    sdk_version: "current",
+    static_libs: [
+        "jsr330",
+        "lib-dagger",
+        "androidx.activity_activity",
+        "androidx.annotation_annotation",
+        "androidx.appcompat_appcompat",
+        "androidx.fragment_fragment",
+        "androidx.lifecycle_lifecycle-common-java8",
+        "androidx.lifecycle_lifecycle-viewmodel",
+        "androidx.lifecycle_lifecycle-viewmodel-savedstate",
+        "lib-dagger-android",
+        "lib-dagger-lint-aar",
+    ],
+}
+
+java_import_host {
+    name: "lib-dagger-android-processor-import",
+    jars: [
+        "com/google/dagger/dagger-android-processor/2.50/dagger-android-processor-2.50.jar",
+        "com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+        "com/google/dagger/dagger-spi/2.50/dagger-spi-2.50.jar",
+        "com/google/devtools/ksp/symbol-processing-api/1.9.20-1.0.14/symbol-processing-api-1.9.20-1.0.14.jar",
+        "com/google/errorprone/error_prone_annotations/2.15.0/error_prone_annotations-2.15.0.jar",
+        "org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar",
+        "net/ltgt/gradle/incap/incap/0.2/incap-0.2.jar",
+    ],
+}
+
+java_plugin {
+    name: "lib-dagger-android-processor",
+    static_libs: [
+        "lib-dagger-android-processor-import",
+        "jsr330",
+        "javapoet",
+        "lib-incap",
+        "lib-dagger",
+        "lib-google-java-format",
+        "lib-guava-failureaccess",
+        "lib-guava-jre",
+    ],
+    processor_class: "dagger.android.processor.AndroidProcessor",
+    generates_api: true,
+    jarjar_rules: "dagger-jarjar-rules.txt"
+}

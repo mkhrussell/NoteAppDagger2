@@ -1,0 +1,23 @@
+android_app {
+    name: "NoteAppDagger2",
+    package_name: "com.kamrul.noteapplication",
+    manifest: "app/src/main/AndroidManifest.xml",
+    //resource_dirs: [],
+    //srcs: [],
+
+    static_libs: [
+        "NoteAppDagger2-app-module",
+    ],
+
+    certificate: "shared",
+    privileged: true,
+    required: ["NoteAppDagger2-app-module"],
+
+    optimize: {
+        enabled: false,
+        //proguard_flags_files: ["proguard.flags"],
+    },
+
+    sdk_version: "system_current",
+    min_sdk_version: "31",
+}
